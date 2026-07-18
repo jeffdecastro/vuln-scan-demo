@@ -26,7 +26,7 @@ jobs:
 
       # Step A: full scan, output SARIF, DO NOT fail here (we want the results uploaded)
       - name: Run Trivy (report findings)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'                # scan the filesystem / dependency manifests
           scan-ref: '.'
@@ -44,7 +44,7 @@ jobs:
 
       # Step C: the GATE. Re-run Trivy but this time fail the build on CRITICAL.
       - name: Fail the build on CRITICAL vulnerabilities
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
