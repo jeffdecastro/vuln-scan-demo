@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       # Step A: full scan, output SARIF, DO NOT fail here (we want the results uploaded)
       - name: Run Trivy (report findings)
