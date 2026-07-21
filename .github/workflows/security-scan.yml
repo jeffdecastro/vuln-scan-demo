@@ -22,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # Step A: full scan, output SARIF, DO NOT fail here (we want the results uploaded)
       - name: Run Trivy (report findings)
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: 'fs'                # scan the filesystem / dependency manifests
           scan-ref: '.'
@@ -37,14 +37,14 @@ jobs:
 
       # Step B: push those results into the GitHub Security tab
       - name: Upload results to the Security tab
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@08d09a53f0f5d694f253bd25732e4429c9e9337f # v3.37.2
         if: always()                     # upload even if a later step fails
         with:
           sarif_file: 'trivy-results.sarif'
 
       # Step C: the GATE. Re-run Trivy but this time fail the build on CRITICAL.
       - name: Fail the build on CRITICAL vulnerabilities
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
